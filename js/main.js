@@ -33,7 +33,7 @@ const Utils = {
     // Throttle para eventos de scroll más suaves
     throttle(func, limit) {
         let inThrottle;
-        return function() {
+        return function () {
             const args = arguments;
             const context = this;
             if (!inThrottle) {
@@ -63,7 +63,7 @@ const Utils = {
             const progress = Math.min(elapsed / duration, 1);
             const current = Math.floor(start + (end - start) * this.easeOutQuart(progress));
             element.textContent = current;
-            
+
             if (progress < 1) {
                 requestAnimationFrame(update);
             } else {
@@ -85,3 +85,5 @@ const Navigation = {
         this.setupSmoothScrolling();
         this.setupScrollEffects();
         this.setupMobileMenu();
+    }
+}
