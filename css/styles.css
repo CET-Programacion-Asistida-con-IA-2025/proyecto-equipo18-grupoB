@@ -363,3 +363,103 @@ footer {
     font-size: 1.2rem;
     text-align: center;
 }
+
+.map-container {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.map-container h3 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+.map-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #f8f9fa;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.map-iframe {
+    width: 100%;
+    height: 600px;
+    border: none;
+    display: block;
+}
+
+.map-info {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+}
+
+.map-info i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+}
+
+.map-info p {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.risk-regions {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.risk-regions h4 {
+    color: #856404;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.risk-regions p {
+    color: #856404;
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .map-container {
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+
+    .map-iframe {
+        height: 400px;
+    }
+
+    .map-info {
+        padding: 1rem;
+    }
+
+    .map-info i {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .map-iframe {
+        height: 300px;
+    }
+}

@@ -155,16 +155,28 @@
                     </form>
                     <div id="riskResult"></div>
                 </div>
-
                 <div class="map-container">
-                    <h3>Mapa de Contaminación</h3>
-                    <div class="map-placeholder">
-                        <div>
-                            <i class="fas fa-map-marked-alt" style="font-size: 3rem; margin-bottom: 1rem;"></i>
-                            <p>Mapa Interactivo de Áreas con Altos Niveles de Arsénico</p>
-                            <p>Regiones de Alto Riesgo: Argentina (Región Chaco-Pampean), Bangladesh, India Occidental,
-                                Chile Norte, México (Estados del Norte)</p>
-                        </div>
+                    <h3><i class="fas fa-map-marked-alt"></i> Mapa Interactivo de Contaminación por Arsénico</h3>
+
+                    <div class="map-info">
+                        <i class="fas fa-globe-americas"></i>
+                        <p><strong>Visualización de Áreas con Altos Niveles de Arsénico en Argentina</strong></p>
+                        <p>Explora las regiones con mayor concentración de arsénico en fuentes de agua</p>
+                    </div>
+
+                    <div class="map-wrapper">
+                        <iframe class="map-iframe" src="https://mapa-de-arsenico.web.app/"
+                            title="Mapa de Arsénico en Argentina" loading="lazy">
+                        </iframe>
+                    </div>
+
+                    <div class="risk-regions">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Regiones de Alto Riesgo Identificadas:</h4>
+                        <p>
+                            <strong>Argentina:</strong> Región Chaco-Pampeana •
+                            <strong>Internacional:</strong> Bangladesh, India Occidental, Norte de Chile, Estados del
+                            Norte de México
+                        </p>
                     </div>
                 </div>
             </div>
