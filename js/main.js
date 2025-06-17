@@ -1,89 +1,67 @@
-// Archivo principal de JavaScript para Planeta Verde
-// ================================================
+// Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
 
-// Configuración y variables globales
-const CONFIG = {
-    animationDuration: 600,
-    scrollOffset: 100,
-    parallaxSpeed: 0.5,
-    counterSpeed: 2000
-};
+// Risk Calculator
+document.getElementById('riskCalculator').addEventListener('submit', function (e) {
+    e.preventDefault();
 
-// Utilidades
-const Utils = {
-    // Selector de elementos con manejo de errores
-    $(selector) {
-        const elements = document.querySelectorAll(selector);
-        return elements.length === 1 ? elements[0] : elements;
-    },
+    const concentration = parseFloat(document.getElementById('concentration').value);
+    const consumption = parseFloat(document.getElementById('consumption').value);
+    const weight = parseFloat(document.getElementById('weight').value);
+    const age = document.getElementById('age').value;
 
-    // Debounce para optimizar eventos de scroll
-    debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    },
-
-    // Throttle para eventos de scroll más suaves
-    throttle(func, limit) {
-        let inThrottle;
-        return function () {
-            const args = arguments;
-            const context = this;
-            if (!inThrottle) {
-                func.apply(context, args);
-                inThrottle = true;
-                setTimeout(() => inThrottle = false, limit);
-            }
-        };
-    },
-
-    // Verificar si un elemento está visible en el viewport
-    isInViewport(element, offset = 0) {
-        const rect = element.getBoundingClientRect();
-        return (
-            rect.top >= -offset &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) + offset &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-    },
-
-    // Animación de números
-    animateNumber(element, start, end, duration) {
-        const startTime = performance.now();
-        const update = (currentTime) => {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            const current = Math.floor(start + (end - start) * this.easeOutQuart(progress));
-            element.textContent = current;
-
-            if (progress < 1) {
-                requestAnimationFrame(update);
-            } else {
-                element.textContent = end;
-            }
-        };
-        requestAnimationFrame(update);
-    },
-
-    // Función de easing
-    easeOutQuart(t) {
-        return 1 - (--t) * t * t * t;
+    // Validate inputs
+    if (isNaN(concentration) || isNaN(consumption) || isNaN(weight) ||
+        concentration <= 0 || consumption <= 0 || weight <= 0) {
+        alert('Por favor, ingrese valores numéricos válidos mayores a cero.');
+        return;
     }
-};
 
-// Gestión de la navegación
-const Navigation = {
-    init() {
-        this.setupSmoothScrolling();
-        this.setupScrollEffects();
-        this.setupMobileMenu();
+    // Calculate daily intake (μg/kg/day)
+    const dailyIntake = (concentration * consumption) / weight;
+
+    // WHO reference dose: 0.3 μg/kg/day
+    const referenceDose = 0.3; // Corregido: era "referenceDoze"
+    const riskRatio = dailyIntake / referenceDose;
+
+    let riskLevel, riskClass, recommendations;
+
+    if (riskRatio <= 0.5) {
+        riskLevel = "BAJO";
+        riskClass = "alert-success";
+        recommendations = "Su nivel de exposición está dentro de los parámetros seguros. Continúe monitoreando periódicamente.";
+    } else if (riskRatio <= 1.0) {
+        riskLevel = "MODERADO";
+        riskClass = "alert-warning";
+        recommendations = "Su exposición se acerca a los límites recomendados. Considere instalar un sistema de filtración y realizar análisis más frecuentes.";
+    } else {
+        riskLevel = "ALTO";
+        riskClass = "alert-danger";
+        recommendations = "Su exposición excede los límites seguros. Es URGENTE implementar un sistema de tratamiento de agua y consultar con profesionales de la salud.";
     }
-}
+
+    // Display results
+    const resultDiv = document.getElementById('riskResult');
+    resultDiv.innerHTML = `
+        <div class="alert ${riskClass}">
+            <h4>Nivel de Riesgo: ${riskLevel}</h4>
+            <p><strong>Ingesta diaria calculada:</strong> ${dailyIntake.toFixed(3)} μg/kg/día</p>
+            <p><strong>Ratio de riesgo:</strong> ${riskRatio.toFixed(2)}</p>
+            <p><strong>Recomendaciones:</strong> ${recommendations}</p>
+        </div>
+    `;
+
+    // Show the result section
+    resultDiv.style.display = 'block';
+});
