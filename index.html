@@ -6,7 +6,489 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aguas Sin Arsénico - Protegiendo Nuestro Futuro</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            color: #4ecdc4;
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #4ecdc4;
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+            padding: 2rem 0;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            color: white;
+            padding: 4rem 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
+            border-radius: 20px;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .content-section h2 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            border-bottom: 3px solid #4ecdc4;
+            padding-bottom: 0.5rem;
+        }
+
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 4px solid #4ecdc4;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .card h3 i {
+            color: #4ecdc4;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* Interactive Tools */
+        .tool-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+
+        .calculator,
+        .map-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+
+        .form-group {
+            margin: 1rem 0;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .btn {
+            background: #4ecdc4;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #45b7b8;
+        }
+
+        /* Alert Styles */
+        .alert {
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            font-weight: bold;
+        }
+
+        .alert-danger {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        /* Forum Section */
+        .forum {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+
+        .forum-post {
+            border-bottom: 1px solid #eee;
+            padding: 1rem 0;
+        }
+
+        .forum-post:last-child {
+            border-bottom: none;
+        }
+
+        .forum-post h4 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .forum-post .meta {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* News Section */
+        .news-item {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .news-date {
+            background: #4ecdc4;
+            color: white;
+            padding: 0.5rem;
+            border-radius: 5px;
+            text-align: center;
+            min-width: 80px;
+            height: fit-content;
+        }
+
+        /* Testimonials */
+        .testimonial {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid #4ecdc4;
+        }
+
+        .testimonial blockquote {
+            font-style: italic;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .testimonial cite {
+            font-weight: bold;
+            color: #4ecdc4;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        /* FAQ Styles */
+        .faq-item {
+            border-bottom: 1px solid #eee;
+            padding: 1rem 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-item h4 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Map placeholder */
+        .map-placeholder {
+            height: 400px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .map-container {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .map-container h3 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .map-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #f8f9fa;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .map-iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            display: block;
+        }
+
+        .map-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+        }
+
+        .map-info i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .map-info p {
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        .risk-regions {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .risk-regions h4 {
+            color: #856404;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .risk-regions p {
+            color: #856404;
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .map-container {
+                padding: 1rem;
+                margin: 1rem 0;
+            }
+
+            .map-iframe {
+                height: 400px;
+            }
+
+            .map-info {
+                padding: 1rem;
+            }
+
+            .map-info i {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .map-iframe {
+                height: 300px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -186,6 +668,44 @@
         <section id="comunidad" class="content-section fade-in">
             <h2><i class="fas fa-users"></i> Comunidad</h2>
 
+            <!-- Community Form -->
+            <div class="card">
+                <h3><i class="fas fa-comment"></i> Únete a la Conversación</h3>
+                <form id="communityForm">
+                    <div class="form-group">
+                        <label for="userName">Nombre:</label>
+                        <input type="text" id="userName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="userEmail">Email:</label>
+                        <input type="email" id="userEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="userLocation">Ubicación:</label>
+                        <input type="text" id="userLocation" placeholder="Ciudad, País">
+                    </div>
+                    <div class="form-group">
+                        <label for="postType">Tipo de Mensaje:</label>
+                        <select id="postType" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="question">Pregunta</option>
+                            <option value="experience">Compartir Experiencia</option>
+                            <option value="resource">Compartir Recurso</option>
+                            <option value="discussion">Discusión General</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="postTitle">Título del Mensaje:</label>
+                        <input type="text" id="postTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="postContent">Contenido del Mensaje:</label>
+                        <textarea id="postContent" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Publicar Mensaje</button>
+                </form>
+            </div>
+
             <div class="forum">
                 <h3>Foro de Discusión</h3>
                 <div class="forum-post">
@@ -285,10 +805,12 @@
                 </div>
                 <div>
                     <h4>Nueva tecnología promete eliminar 99% del arsénico del agua</h4>
-                    <p>Investigadores desarrollan un filtro innovador que utiliza nanopartículas de hierro para la
-                        remoción eficiente de arsénico...</p>
+                    <p>Investigadores desarrollan un filtro innovador que utiliza nanoparticulas de hierro para la 
+                        remocion eficiente de arsenico ...</pag>
+                    </division>
                 </div>
-            </div>
+
+        
 
             <div class="news-item">
                 <div class="news-date">
