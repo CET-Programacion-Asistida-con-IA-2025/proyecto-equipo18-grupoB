@@ -438,6 +438,14 @@ footer {
     line-height: 1.4;
 }
 
+#chat-container {
+  width: 500px;
+  height: 600px;
+  border: 1px solid #ccc;
+  padding: 20px;
+  overflow-y: auto;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
     .map-container {

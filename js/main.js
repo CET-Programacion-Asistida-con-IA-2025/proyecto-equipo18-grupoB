@@ -1,29 +1,7 @@
 
- <!DOCTYPE html>
-<html>
-<head>
-  <title>Chatbot</title>
-  <style>
-    #chat-container {
-      width: 500px;
-      height: 600px;
-      border: 1px solid #ccc;
-      padding: 20px;
-      overflow-y: auto;
-    }
-  </style>
-</head>
-<body>
-  <div id="chat-container">
-    <div id="chat-log"></div>
-    <input id="user-input" type="text" placeholder="Escribe algo...">
-    <button id="send-btn">Enviar</button>
-  </div>
-
-  <script>
-    const chatLog = document.getElementById('chat-log');
-    const userInput = document.getElementById('user-input');
-    const sendBtn = document.getElementById('send-btn');
+const chatLog = document.getElementById('chat-log');
+const userInput = document.getElementById('user-input');
+const sendBtn = document.getElementById('send-btn');
 
     sendBtn.addEventListener('click', () => {
       const userMessage = userInput.value.trim();
@@ -78,8 +56,5 @@
         chatLog.innerHTML += `<p>Chatbot: Recomendaciones: ${recommendations}</p>`;
       }, 1000);
     }
-  </script>
-</body>
-</html> 
 
     
