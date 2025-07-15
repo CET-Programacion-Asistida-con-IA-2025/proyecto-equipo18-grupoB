@@ -695,28 +695,10 @@
                 riskIcon = 'fas fa-exclamation-circle';
                 riskMessage = 'La exposición excede los límites recomendados.';
             }
-            
-            // Mostrar resultado
-            const resultDiv = document.getElementById('riskResult');
-            resultDiv.innerHTML = `
-                <div class="result-title">
-                    <i class="${riskIcon}"></i>
-                    ${riskLevel}
                 </div>
-                <div class="result-details">
-                    <strong>Grupo de edad:</strong> ${ageGroupName}<br>
-                    <strong>Dosis diaria calculada:</strong> ${dailyDose.toFixed(2)} μg/kg/día<br>
-                    <strong>Límite de referencia:</strong> ${referenceLimit} μg/kg/día<br>
-                    <strong>Porcentaje del límite:</strong> ${percentageOfReference.toFixed(1)}%<br><br>
-                    <strong>Interpretación:</strong> ${riskMessage}
-                </div>
-                <div class="calculation-details">
-                    <strong>Fórmula utilizada:</strong><br>
-                    Dosis = (Concentración × Consumo) ÷ Peso<br>
-                    Dosis = (${concentration} μg/L × ${consumption} L) ÷ ${weight} kg<br>
-                    <strong>Resultado = ${dailyDose.toFixed(2)} μg/kg/día</strong>
-                </div>
-                </div>
+                </script>
+</body>
+</html>
                 <div class="map-container">
                     <h3><i class="fas fa-map-marked-alt"></i> Mapa Interactivo de Contaminación por Arsénico</h3>
 
