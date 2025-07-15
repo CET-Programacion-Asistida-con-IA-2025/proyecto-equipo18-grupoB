@@ -636,8 +636,44 @@
                 <div id="riskResult"></div>
             </div>
         </div>
-    </section>
-// Determinar riesgo
+     <function calcularRiesgo() {
+            console.log('Función calcularRiesgo ejecutada');
+            
+           <// Obtener valores
+            const concentration = parseFloat(document.getElementById('concentration').value);
+            const consumption = parseFloat(document.getElementById('consumption').value);
+            const weight = parseFloat(document.getElementById('weight').value);
+            const ageGroup = document.getElementById('age').value;
+            
+            console.log('Valores:', { concentration, consumption, weight, ageGroup });
+            
+            // Validar
+            if (!concentration || !consumption || !weight || !ageGroup) {
+                alert('Por favor, complete todos los campos.');
+                return;
+            }
+            
+            if (concentration <= 0 || consumption <= 0 || weight <= 0) {
+                alert('Por favor, ingrese valores mayores a 0.');
+                return;
+            }
+            
+            // Calcular dosis diaria
+            const dailyDose = (concentration * consumption) / weight;
+            
+            // Límites de referencia
+            const limits = {
+                child: { limit: 2.1, name: 'Niño (0-12 años)' },
+                teen: { limit: 3.0, name: 'Adolescente (13-17 años)' },
+                adult: { limit: 3.0, name: 'Adulto (18-64 años)' },
+                elderly: { limit: 2.1, name: 'Adulto Mayor (65+ años)' }
+            };
+            
+            const referenceLimit = limits[ageGroup].limit;
+            const ageGroupName = limits[ageGroup].name;
+            const percentageOfReference = (dailyDose / referenceLimit) * 100;
+            
+            // Determinar riesgo
             let riskLevel, riskColor, riskIcon, riskMessage;
             
             if (percentageOfReference <= 50) {
@@ -677,17 +713,6 @@
                     Dosis = (${concentration} μg/L × ${consumption} L) ÷ ${weight} kg<br>
                     <strong>Resultado = ${dailyDose.toFixed(2)} μg/kg/día</strong>
                 </div>
-            `;
-            
-            resultDiv.className = riskColor;
-            resultDiv.style.display = 'block';
-            
-            console.log('Resultado mostrado:', riskLevel);
-        }
-        
-    
-           
-
         
                 <div class="map-container">
                     <h3><i class="fas fa-map-marked-alt"></i> Mapa Interactivo de Contaminación por Arsénico</h3>
