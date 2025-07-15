@@ -603,39 +603,119 @@
             </div>
         </section>
 
-        <!-- Tools Section -->
-        <section id="herramientas" class="tool-section fade-in">
-            <div class="container">
-                <h2><i class="fas fa-calculator"></i> Herramientas Interactivas</h2>
+        <!-- Tools Section --><section id="herramientas" class="tool-section">
+        <div class="container">
+            <h2><i class="fas fa-calculator"></i> Herramientas Interactivas</h2>
+            <div class="calculator">
+                <h3>Calculadora de Riesgo de Exposición al Arsénico</h3>
+                <form id="riskCalculator">
+                    <div class="form-group">
+                        <label for="concentration">Concentración de Arsénico (μg/L):</label>
+                        <input type="number" id="concentration" min="0" max="1000" step="0.1" placeholder="Ej: 10" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="consumption">Consumo Diario de Agua (L):</label>
+                        <input type="number" id="consumption" min="0" max="10" step="0.1" placeholder="Ej: 2" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="weight">Peso Corporal (kg):</label>
+                        <input type="number" id="weight" min="1" max="200" step="0.1" placeholder="Ej: 70" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Grupo de Edad:</label>
+                        <select id="age" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="child">Niño (0-12 años)</option>
+                            <option value="teen">Adolescente (13-17 años)</option>
+                            <option value="adult">Adulto (18-64 años)</option>
+                            <option value="elderly">Adulto Mayor (65+ años)</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn" onclick="calcularRiesgo()">Calcular Riesgo</button>
+                </form>
+                <div id="riskResult"></div>
+            </div>
+        </div>
+    </section>
 
-                <div class="calculator">
-                    <h3>Calculadora de Riesgo de Exposición</h3>
-                    <form id="riskCalculator">
-                        <div class="form-group">
-                            <label for="concentration">Concentración de Arsénico (μg/L):</label>
-                            <input type="number" id="concentration" min="0" max="1000" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="consumption">Consumo Diario de Agua (L):</label>
-                            <input type="number" id="consumption" min="0" max="10" step="0.1" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="weight">Peso Corporal (kg):</label>
-                            <input type="number" id="weight" min="1" max="200" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="age">Grupo de Edad:</label>
-                            <select id="age" required>
-                                <option value="">Seleccionar...</option>
-                                <option value="child">Niño (0-12 años)</option>
-                                <option value="teen">Adolescente (13-17 años)</option>
-                                <option value="adult">Adulto (18-64 años)</option>
-                                <option value="elderly">Adulto Mayor (65+ años)</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn">Calcular Riesgo</button>
-                    </form>
-                    <div id="riskResult"></div>
+    <script>
+        function calcularRiesgo() {
+            console.log('Función calcularRiesgo ejecutada');
+            
+            // Obtener valores
+            const concentration = parseFloat(document.getElementById('concentration').value);
+            const consumption = parseFloat(document.getElementById('consumption').value);
+            const weight = parseFloat(document.getElementById('weight').value);
+            const ageGroup = document.getElementById('age').value;
+            
+            console.log('Valores:', { concentration, consumption, weight, ageGroup });
+            
+            // Validar
+            if (!concentration || !consumption || !weight || !ageGroup) {
+                alert('Por favor, complete todos los campos.');
+                return;
+            }
+            
+            if (concentration <= 0 || consumption <= 0 || weight <= 0) {
+                alert('Por favor, ingrese valores mayores a 0.');
+                return;
+            }
+            
+            // Calcular dosis diaria
+            const dailyDose = (concentration * consumption) / weight;
+            
+            // Límites de referencia
+            const limits = {
+                child: { limit: 2.1, name: 'Niño (0-12 años)' },
+                teen: { limit: 3.0, name: 'Adolescente (13-17 años)' },
+                adult: { limit: 3.0, name: 'Adulto (18-64 años)' },
+                elderly: { limit: 2.1, name: 'Adulto Mayor (65+ años)' }
+            };
+            
+            const referenceLimit = limits[ageGroup].limit;
+            const ageGroupName = limits[ageGroup].name;
+            const percentageOfReference = (dailyDose / referenceLimit) * 100;
+            
+            // Determinar riesgo
+            let riskLevel, riskColor, riskIcon, riskMessage;
+            
+            if (percentageOfReference <= 50) {
+                riskLevel = 'RIESGO BAJO';
+                riskColor = 'result-low';
+                riskIcon = 'fas fa-check-circle';
+                riskMessage = 'La exposición está dentro de límites seguros.';
+            } else if (percentageOfReference <= 100) {
+                riskLevel = 'RIESGO MODERADO';
+                riskColor = 'result-medium';
+                riskIcon = 'fas fa-exclamation-triangle';
+                riskMessage = 'La exposición se acerca a los límites recomendados.';
+            } else {
+                riskLevel = 'RIESGO ALTO';
+                riskColor = 'result-high';
+                riskIcon = 'fas fa-exclamation-circle';
+                riskMessage = 'La exposición excede los límites recomendados.';
+            }
+            
+            // Mostrar resultado
+            const resultDiv = document.getElementById('riskResult');
+            resultDiv.innerHTML = `
+                <div class="result-title">
+                    <i class="${riskIcon}"></i>
+                    ${riskLevel}
+                </div>
+                <div class="result-details">
+                    <strong>Grupo de edad:</strong> ${ageGroupName}<br>
+                    <strong>Dosis diaria calculada:</strong> ${dailyDose.toFixed(2)} μg/kg/día<br>
+                    <strong>Límite de referencia:</strong> ${referenceLimit} μg/kg/día<br>
+                    <strong>Porcentaje del límite:</strong> ${percentageOfReference.toFixed(1)}%<br><br>
+                    <strong>Interpretación:</strong> ${riskMessage}
+                </div>
+                <div class="calculation-details">
+                    <strong>Fórmula utilizada:</strong><br>
+                    Dosis = (Concentración × Consumo) ÷ Peso<br>
+                    Dosis = (${concentration} μg/L × ${consumption} L) ÷ ${weight} kg<br>
+                    <strong>Resultado = ${dailyDose.toFixed(2)} μg/kg/día</strong>
+                </div>
                 </div>
                 <div class="map-container">
                     <h3><i class="fas fa-map-marked-alt"></i> Mapa Interactivo de Contaminación por Arsénico</h3>
