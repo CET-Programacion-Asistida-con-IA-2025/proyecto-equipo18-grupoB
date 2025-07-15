@@ -866,15 +866,44 @@
                 <cite>- Ing. Patricia Vega, ONG Agua Limpia</cite>
             </div>
         </section>
+        <!DOCTYPE html>
+<html>
+<head>
+  <title>Chatbot</title>
+  <style>
+    #chat-container {
+      width: 500px;
+      height: 600px;
+      border: 1px solid #ccc;
+      padding: 20px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+  <div id="chat-container">
+    <div id="chat-log"></div>
+    <input id="user-input" type="text" placeholder="Escribe algo...">
+    <button id="send-btn">Enviar</button>
+  </div>
 
-        <h4>Nota: este estilo es temporal, solo demuestra que la funcionalidad del chatbot, está andando :)</h4>
-        <div id="chat-container">
-            <div id="chat-log"></div>
-            <input id="user-input" type="text" placeholder="Escribe algo...">
-            <button id="send-btn">Enviar</button>
-        </div>
-    </main>
+  <script>
+    const chatLog = document.getElementById('chat-log');
+    const userInput = document.getElementById('user-input');
+    const sendBtn = document.getElementById('send-btn');
+const chatLog = document.getElementById('chat-log');
+const userInput = document.getElementById('user-input');
+const sendBtn = document.getElementById('send-btn');
 
+    sendBtn.addEventListener('click', () => {
+      const userMessage = userInput.value.trim();
+@@ -78,8 +56,5 @@
+        chatLog.innerHTML += `<p>Chatbot: Recomendaciones: ${recommendations}</p>`;
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
     <footer>
         <div class="container">
             <p>&copy; 2025 Aguas Sin Arsénico. Comprometidos con la protección de la salud y el medio ambiente.</p>
