@@ -1,4 +1,5 @@
 Problemática de Contaminación del Arsénico en Aguas
+
 Descripción del Problema
 La contaminación del arsénico en aguas es un problema grave que afecta a millones de personas en todo el mundo. El arsénico es un elemento tóxico que puede causar graves problemas de salud, incluyendo cáncer, enfermedades cardiovasculares y neurológicas. La contaminación del arsénico en aguas puede provenir de fuentes naturales, como la erosión de rocas y suelos, o de actividades humanas, como la minería y la agricultura.
 
